@@ -931,34 +931,50 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 <!-- EmailJS SDK -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-<script type="text/javascript">
-    (function(){
+<script>
+window.addEventListener('load', function() {
+    // 1️⃣ Dynamically load the EmailJS SDK
+    var emailJsScript = document.createElement('script');
+    emailJsScript.src = "https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js";
+    emailJsScript.async = true;
+
+    // 2️⃣ Initialize EmailJS and set up form handler after SDK is loaded
+    emailJsScript.onload = function() {
+        // Initialize EmailJS with your public key
         emailjs.init("T6We_0vgp5Skq1Oqm"); // Replace with your actual EmailJS Public Key
-    })();
 
-    document.getElementById("contact-form").addEventListener("submit", function(event) {
-        event.preventDefault();
+        // Set up contact form submission
+        var contactForm = document.getElementById("contact-form");
+        if(contactForm) {
+            contactForm.addEventListener("submit", function(event) {
+                event.preventDefault();
 
-        // Collect form data
-        const templateParams = {
-            name: document.getElementById("name").value,
-            email: document.getElementById("email2").value,
-            service: document.getElementById("service").value,
-            message: document.getElementById("message").value,
-        };
+                // Collect form data
+                const templateParams = {
+                    name: document.getElementById("name").value,
+                    email: document.getElementById("email2").value,
+                    service: document.getElementById("service").value,
+                    message: document.getElementById("message").value,
+                };
 
-        // Send email using EmailJS
-        emailjs.send("service_qfw7pgf", "template_bu79boj", templateParams)
-            .then(function(response) {
-                alert("✅ Your request has been sent successfully!");
-                document.getElementById("contact-form").reset();
-            }, function(error) {
-                alert("❌ Oops! Something went wrong. Please try again.");
-                console.error("FAILED...", error);
+                // Send email using EmailJS
+                emailjs.send("service_qfw7pgf", "template_bu79boj", templateParams)
+                    .then(function(response) {
+                        alert("✅ Your request has been sent successfully!");
+                        contactForm.reset();
+                    }, function(error) {
+                        alert("❌ Oops! Something went wrong. Please try again.");
+                        console.error("FAILED...", error);
+                    });
             });
-    });
+        }
+    };
+
+    // Append the SDK script to the body
+    document.body.appendChild(emailJsScript);
+});
 </script>
+
 
 
                 </div>
@@ -1658,6 +1674,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97450cbe52f1c23e',t:'MTc1NjA2MTU3OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
+
 
 
 
