@@ -3,5 +3,4 @@
 User-agent: *
 Allow: /
 
-# Sitemap (add this file later when you generate it)
-# Sitemap: https://rdesigns.pro/sitemap.xml
+Sitemap: https://rdesigns.pro/sitemap.xml
